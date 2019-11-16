@@ -1,2 +1,6 @@
-Kernel compression mode = LZ4
-UTS namespace = y
+General setup
+	Kernel compression mode = LZ4
+	UTS namespace = y
+	CONFIG_SCHED_AUTOGROUP = n
+	Support initial ramdisk/ramfs compressed using ...
+		LZ4 = y, ÆäËû = n

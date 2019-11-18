@@ -4,3 +4,11 @@ General setup
 	CONFIG_SCHED_AUTOGROUP = n
 	Support initial ramdisk/ramfs compressed using ...
 		LZ4 = y, ÆäËû = n
+
+
+Processor type and features
+	Linux guest support = n
+	Maximum number of CPUs = 4
+	Machine Check / overheating reporting = y
+	CPU microcode loading support = y
+		EFI stub support = n

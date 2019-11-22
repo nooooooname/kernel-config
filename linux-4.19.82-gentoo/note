@@ -12,3 +12,8 @@ Processor type and features
 	Machine Check / overheating reporting = y
 	CPU microcode loading support = y
 		EFI stub support = n
+	vsyscall table for legacy applications (Emulate)
+		# 可以用内核命令行参数 vsyscall=[emulate|none] 来修改
+
+
+Power management and ACPI options

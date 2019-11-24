@@ -1,19 +1,28 @@
 General setup
 	Kernel compression mode = LZ4
-	UTS namespace = y
-	CONFIG_SCHED_AUTOGROUP = n
+	Namespaces support  --->
+		UTS namespace = Y
+	Automatic process group scheduling = N
 	Support initial ramdisk/ramfs compressed using ...
-		LZ4 = y, 其他 = n
+		LZ4 = Y, 其他 = N
 
 
 Processor type and features
-	Linux guest support = n
+	Linux guest support = N
+	Processor family  = Core 2/newer Xeon
 	Maximum number of CPUs = 4
-	Machine Check / overheating reporting = y
-	CPU microcode loading support = y
-		EFI stub support = n
+	Machine Check / overheating reporting = Y
+	CPU microcode loading support = Y
+	EFI runtime service support ->
+		EFI stub support = N
 	vsyscall table for legacy applications (Emulate)
 		# 可以用内核命令行参数 vsyscall=[emulate|none] 来修改
 
 
 Power management and ACPI options
+	ACPI (Advanced Configuration and Power Interface) Support  --->
+		Fan(风扇) = N
+		ACPI Time and Alarm (TAD) Device Support = M
+		Thermal Zone = N	# ACPI thermal zone 支持.系统温度过高时可以及时调整风扇的工作状态以避免你的CPU被烧毁.目前所有CPU都支持此特性.务必开启.
+		ACPI Platform Error Interface (APEI) = N	# 高级平台错误接口
+		ACPI configfs support = M

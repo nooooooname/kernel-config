@@ -35,3 +35,8 @@ Power management and ACPI options
 	CPU Idle  --->
 		Ladder governor (for periodic timer tick) = N	# ?
 	Cpuidle Driver for Intel Processors = N			# 专用于Intel CPU的cpuidle驱动
+
+Bus options (PCI etc.)
+	PCI Express Downstream Port Containment support = N	# PCI Express Downstream Port Containment是什么?
+	PCI Express Precision Time Measurement support = N	# PCI Express Precision Time Measurement是什么?
+	PCI Stub driver = N					# PCI设备穿透(PCI Stub)

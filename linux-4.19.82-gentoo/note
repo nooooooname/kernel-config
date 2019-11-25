@@ -1,28 +1,37 @@
 General setup
-	Kernel compression mode = LZ4
-	Namespaces support  --->
-		UTS namespace = Y
+	Kernel compression mode = LZ4				# 内核压缩算法
+	Namespaces support  --->				# 命名空间支持.主要用于支持基于容器的轻量级虚拟化技术(比如LXC和Linux-VServer以及Docker).
+		UTS namespace = Y				# uname()系统调用的命名空间支持
 	Automatic process group scheduling = N
-	Support initial ramdisk/ramfs compressed using ...
+	Support initial ramdisk/ramfs compressed using ...	# ramdisk或cpio镜像的压缩/解压格式支持
 		LZ4 = Y, 其他 = N
 
 
 Processor type and features
-	Linux guest support = N
+	Linux guest support = N				# 此选项启用基本的虚拟机检测和平台设置,如果内核在虚拟机里面运行就开启,否则就关闭.
 	Processor family  = Core 2/newer Xeon
 	Maximum number of CPUs = 4
 	Machine Check / overheating reporting = Y
-	CPU microcode loading support = Y
+	CPU microcode loading support = Y		# CPU的微代码更新支持
 	EFI runtime service support ->
-		EFI stub support = N
+		EFI stub support = N			# EFI stub 支持.如果开启此项,就可以不通过引导程序,而是直接由EFI固件来加载内核
 	vsyscall table for legacy applications (Emulate)
 		# 可以用内核命令行参数 vsyscall=[emulate|none] 来修改
 
 
 Power management and ACPI options
 	ACPI (Advanced Configuration and Power Interface) Support  --->
-		Fan(风扇) = N
+		Fan = N						# 允许用户模式应用程序执行基本风扇控制(开、关、状态)
 		ACPI Time and Alarm (TAD) Device Support = M
 		Thermal Zone = N	# ACPI thermal zone 支持.系统温度过高时可以及时调整风扇的工作状态以避免你的CPU被烧毁.目前所有CPU都支持此特性.务必开启.
 		ACPI Platform Error Interface (APEI) = N	# 高级平台错误接口
 		ACPI configfs support = M
+	CPU Frequency scaling  --->			# CPUfreq子系统允许动态改变CPU主频
+		CPU Frequency scaling = Y			# (虚拟机没必要开启)
+		CPU frequency transition statistics = N		# 通过sysfs文件系统输出CPU频率变化的统计信息
+		Default CPUFreq governor = userspace		# 默认CPU调频策略
+		'performance' governor = M			# 性能优先调频策略
+		'schedutil' cpufreq policy governor = N		# ?
+	CPU Idle  --->
+		Ladder governor (for periodic timer tick) = N	# ?
+	Cpuidle Driver for Intel Processors = N			# 专用于Intel CPU的cpuidle驱动

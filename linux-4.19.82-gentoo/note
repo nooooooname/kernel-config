@@ -37,6 +37,11 @@ Power management and ACPI options
 	Cpuidle Driver for Intel Processors = N			# 专用于Intel CPU的cpuidle驱动
 
 Bus options (PCI etc.)
+	PCI Express Hotplug driver = N				# PCI-E热插拔驱动
 	PCI Express Downstream Port Containment support = N	# PCI Express Downstream Port Containment是什么?
 	PCI Express Precision Time Measurement support = N	# PCI Express Precision Time Measurement是什么?
 	PCI Stub driver = N					# PCI设备穿透(PCI Stub)
+	PCI IOV support = N					# PCI设备I/O虚拟化
+	Support for PCI Hotplug  ---> = N			# PCI热插拔支持(PCI-E热插拔驱动依赖此项为Y)
+	PCI controller drivers  --->
+		Intel Volume Management Device Driver = N	# 英特尔卷管理设备

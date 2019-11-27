@@ -45,3 +45,12 @@ Bus options (PCI etc.)
 	Support for PCI Hotplug  ---> = N			# PCI热插拔支持(PCI-E热插拔驱动依赖此项为Y)
 	PCI controller drivers  --->
 		Intel Volume Management Device Driver = N	# 英特尔卷管理设备
+	PCI Endpoint  --->
+		PCI Endpoint Support = N			# PCI端点是什么?
+
+Firmware Drivers
+	EFI (Extensible Firmware Interface) Support  --->
+		EFI Variable Support via sysfs = N		# 通过sysfs接口支持操作(读/写/新建/删除)EFI变量
+		EFI capsule loader = N				# EFI胶囊装载器接口/dev/efi_capsule_loader
+
+Virtualization  ---- = N				# 虚拟化子菜单项全部禁用

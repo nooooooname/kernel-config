@@ -54,3 +54,13 @@ Firmware Drivers
 		EFI capsule loader = N				# EFI胶囊装载器接口/dev/efi_capsule_loader
 
 Virtualization  ---- = N				# 虚拟化子菜单项全部禁用
+
+Enable loadable module support
+	Trim unused exported kernel symbols = Y				# 从内核和模块中删除未使用的导出符号
+	Enable support for block device writeback throttling = N	# ?
+
+Enable the block layer
+	Partition Types  --->
+		Macintosh partition map support = N			# Mac分区支持
+		BSD disklabel (FreeBSD partition tables) support = N	# FreeBSD分区表支持
+		Windows Logical Disk Manager (Dynamic Disk) support = Y	# Windows动态磁盘支持

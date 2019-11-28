@@ -71,3 +71,7 @@ Enable the block layer
 		MQ deadline I/O scheduler = M				# deadline I/O调度器的MQ版本
 		Kyber I/O scheduler = M					# Kyber I/O调度器
 		BFQ I/O scheduler = N					# BFQ(Budget Fair Queueing) I/O调度器
+
+Memory Management options
+	Low address space to protect from user allocation = 65536
+	Transparent Hugepage Support = Y				# 大页支持

@@ -9,7 +9,7 @@ General setup
 
 Processor type and features
 	Linux guest support = N				# 此选项启用基本的虚拟机检测和平台设置,如果内核在虚拟机里面运行就开启,否则就关闭.
-	Processor family  = Core 2/newer Xeon
+	Processor family = Core 2/newer Xeon
 	Maximum number of CPUs = 4
 	Machine Check / overheating reporting = Y
 	CPU microcode loading support = Y		# CPU的微代码更新支持
@@ -64,3 +64,10 @@ Enable the block layer
 		Macintosh partition map support = N			# Mac分区支持
 		BSD disklabel (FreeBSD partition tables) support = N	# FreeBSD分区表支持
 		Windows Logical Disk Manager (Dynamic Disk) support = Y	# Windows动态磁盘支持
+	IO Schedulers  --->					# I/O调度器
+		Deadline I/O scheduler = M				# deadline I/O调度器
+		CFQ I/O scheduler = M					# CFQ(Complete Fair Queuing) I/O调度器
+		Default I/O scheduler = No-op				# 默认I/O调度器(No-op: 带合并的先来先服务调度)
+		MQ deadline I/O scheduler = M				# deadline I/O调度器的MQ版本
+		Kyber I/O scheduler = M					# Kyber I/O调度器
+		BFQ I/O scheduler = N					# BFQ(Budget Fair Queueing) I/O调度器

@@ -74,4 +74,9 @@ Enable the block layer
 
 Memory Management options
 	Low address space to protect from user allocation = 65536
-	Transparent Hugepage Support = Y				# 大页支持
+	Transparent Hugepage Support = Y					# 大页支持
+	Enable cleancache driver to cache clean pages if tmem is present = N	# 内存页的"受害者缓存"
+	Enable frontswap to cache swap pages if tmem is present = N		# 交换内存的"受害者缓存"
+	Contiguous Memory Allocator = N						# 连续内存分配器
+
+Networking support

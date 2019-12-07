@@ -80,3 +80,7 @@ Memory Management options
 	Contiguous Memory Allocator = N						# 连续内存分配器
 
 Networking support
+	Networking options  --->
+		Packet: sockets monitoring interface = M		# PF_PACKET套接字监控接口
+		UNIX: socket monitoring interface = M			# UNIX套接字监控接口
+		PF_KEY sockets = Y					# PF_KEYv2套接字支持

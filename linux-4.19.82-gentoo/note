@@ -84,3 +84,9 @@ Networking support
 		Packet: sockets monitoring interface = M		# PF_PACKET套接字监控接口
 		UNIX: socket monitoring interface = M			# UNIX套接字监控接口
 		PF_KEY sockets = Y					# PF_KEYv2套接字支持
+		IP: multicasting = N					# IP多播支持
+		IP: kernel level autoconfiguration = N			# 在内核启动时自动配置网卡的ip地址/路由表
+		INET: socket monitoring interface = Y			# INET socket 监控接口
+		UDP: socket monitoring interface = N			# UDP socket 监控接口
+		TCP: advanced congestion control  ---- = N		# TCP高级拥塞控制子菜单(默认为"CUBIC"并将"new Reno"作为候补)
+		TCP: MD5 Signature Option support (RFC2385) = N		# RFC2385中对TCP会话的MD5签名保护机制的支持

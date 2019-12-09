@@ -119,3 +119,7 @@ Device Drivers
 		NVM Express block device = Y					# NVMe块设备
 		NVMe multipath support = Y					# NVMe多路径支持?
 	Misc devices  --->						# 杂项设备，子选项和子菜单选项全N
+	SCSI device support  --->
+		SCSI CDROM support = M						# SCSI光驱支持
+		Asynchronous SCSI scanning = N					# 异步SCSI扫描
+		SCSI low-level drivers  ---- = N				# 底层SCSI驱动程序

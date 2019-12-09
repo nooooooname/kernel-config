@@ -110,3 +110,12 @@ Networking support
 	Wireless  ---> = -Y-							# 无线网络支持
 		cfg80211 - wireless configuration API = N			# Linux无线局域网(802.11)配置接口
 	RF switch subsystem support  ---- = N					# 射频开关控制器
+
+Device Drivers
+	Block devices  --->
+		Number of loop devices to pre-create at init time = 0		# 系统预先初始化的loop设备个数，此值可以通过内核引导参数loop.max_loop修改
+		DRBD Distributed Replicated Block Device support = N		# DRBD支持
+	NVME Support  --->
+		NVM Express block device = Y					# NVMe块设备
+		NVMe multipath support = Y					# NVMe多路径支持?
+	Misc devices  --->						# 杂项设备，子选项和子菜单选项全N

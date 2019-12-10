@@ -139,3 +139,13 @@ Device Drivers
 		MAC-VLAN support = N						# MAC-VLAN支持
 		IEEE 802.1AE MAC-level encryption (MACsec) = N			# 802.1AE支持
 		Network console logging support = N				# 网络控制台，用于通过网络记录内核日志信息
+		Universal TUN/TAP device driver support = N			# 虚拟网卡 TUN/TAP 驱动
+		Ethernet driver support  ---> = Y				# 网卡驱动，除了下列2项之外其余子选项全N
+			Intel devices = Y					# 英特尔网卡
+			Intel(R) PRO/1000 Gigabit Ethernet support = M		# e1000
+		FDDI driver support = N						# 光纤分布式数据接口驱动
+		MDIO bus device drivers  ---- = N				# MDIO总线设备驱动?
+		PHY Device support and infrastructure  ---- = N			# 数据链路层芯片简称为MAC控制器,物理层芯片简称之为PHY,通常的网卡把MAC和PHY的功能做到了一颗芯片中,但也有一些仅含PHY的"软网卡".此选项就是对这些"软网卡"的支持.
+		USB Network Adapters  ---- = N					# USB网络适配器
+		Wireless LAN  ---- = N						# 无线网卡
+		VMware VMXNET3 ethernet driver = N				# VMware vmxnet3 虚拟以太网卡驱动

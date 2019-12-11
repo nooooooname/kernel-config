@@ -149,3 +149,17 @@ Device Drivers
 		USB Network Adapters  ---- = N					# USB网络适配器
 		Wireless LAN  ---- = N						# 无线网卡
 		VMware VMXNET3 ethernet driver = N				# VMware vmxnet3 虚拟以太网卡驱动
+	Input device support  --->
+		Support for memoryless force-feedback devices = -Y-		# 力反馈设备
+		Mouse interface = M						# 鼠标接口(/dev/input/mouseX,/dev/input/mice)，mousedev
+		Keyboards  ---> = Y					# 键盘驱动，除了下列这一项之外其余子选项全N
+			AT keyboard = Y						# 标准AT键盘或者PS/2键盘
+		Mice  ---> = Y						# 鼠标驱动，除了下列这一项之外其余子选项全N
+			PS/2 mouse = M						# 标准的两键或三键的PS/2鼠标，psmouse
+		Miscellaneous devices  ---> = Y				# 杂项输入设备，除了下列这一项之外其余子选项全N
+			PC Speaker support = M					# 标准蜂鸣器，pcspkr
+		Hardware I/O ports  --->
+			User space serio port driver support = N		# ?
+	Character devices  --->						# 字符设备
+		Automatically load TTY Line Disciplines = Y			# 自动加载TTY行规程
+		Serial drivers  --->						# 串口(COM)驱动，子选项全N

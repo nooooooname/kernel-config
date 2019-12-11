@@ -163,3 +163,5 @@ Device Drivers
 	Character devices  --->						# 字符设备
 		Automatically load TTY Line Disciplines = Y			# 自动加载TTY行规程
 		Serial drivers  --->						# 串口(COM)驱动，子选项全N
+		Hardware Random Number Generator Core support  ---- = N		# 硬件随机数发生器设备(/dev/hwrng)支持
+		/dev/nvram support = N						# 以主设备号10次设备号144创建字符设备/dev/nvram来读写CMOS RAM

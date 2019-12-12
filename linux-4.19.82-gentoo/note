@@ -165,3 +165,14 @@ Device Drivers
 		Serial drivers  --->						# 串口(COM)驱动，子选项全N
 		Hardware Random Number Generator Core support  ---- = N		# 硬件随机数发生器设备(/dev/hwrng)支持
 		/dev/nvram support = N						# 以主设备号10次设备号144创建字符设备/dev/nvram来读写CMOS RAM
+		TPM Hardware Support  ---- = N					# 可信平台模块硬件支持
+		/dev/port character device = Y					# /dev/port字符设备，用于访问I/O端口
+	Trust the CPU manufacturer to initialize Linux's CRNG = Y	# 信任CPU的制造商来初始化一致性随机数生成器? 可用"random.trust_cpu=on/off"修改
+	I2C support  --->
+		ACPI I2C Operation region support = N				# 允许BIOS中的代码通过I2C主机控制器驱动访问I2C从设备
+		I2C device interface = N					# I2C设备接口(字符设备/dev/i2c-*)
+		I2C Hardware Bus support  --->
+			Intel PIIX4 and compatible (ATI/AMD/Serverworks/Broadcom/SMSC) = Y	# 英特尔PIIX4系列及与之兼容的系统管理总线(SMBus)驱动
+			SMBus Control Method Interface = N					# SMBus控制方法接口
+		I2C slave support = N						# I2C从机模式支持
+	Hardware Monitoring support  ---- = N				# 温度/电压/风扇转速等状况的监控硬件驱动

@@ -201,3 +201,24 @@ Device Drivers
 			PCI sound devices  ---> = Y				# PCI声卡设备，除了下列这一项之外其余子选项全N
 				(Creative) Ensoniq AudioPCI 1371/1373 = M		# Ensoniq ES1371声卡驱动
 			Pre-allocated buffer size for HD-audio driver = 0	# 为HD-audio声卡驱动预先分配的缓冲区大小(kB)
+	HID support  --->						# 人机接口(HID)设备支持,HID设备不一定要有人机接口,只要符合HID规范,就是HID设备.[提示]PS/2接口的鼠标和键盘不是HID设备,USB或蓝牙接口的才是HID设备.
+		HID bus support = N						# HID总线及通用HID层
+	USB support  ---> = Y						# USB支持
+		Support for Host-side USB = M					# 主机端USB支持，usbcore
+		PCI based USB host interface = N				# 基于PCI的USB接口
+		Enable USB persist by default = Y				# 默认电力会话中断期间USB设备数据结构维持不变
+		xHCI HCD (USB 3.0) support = M					# USB 3.0驱动，xhci-hcd
+		EHCI HCD (USB 2.0) support = M					# USB 2.0驱动，ehci-hcd
+		USB Mass Storage support = M					# USB存储设备支持，usb-storage，该选项下边依赖于此的具体设备全N
+		*** USB Imaging devices ***					# USB影像设备，全N
+		USB Serial Converter support  ---- = N				# USB-串口转换支持
+		*** USB Miscellaneous drivers ***				# USB杂项驱动，全N
+	Real Time Clock  ---> = Y					# 通用实时时钟类支持，(下面的第一个子项选N会怎样?)
+		Set system time from RTC on startup and resume = Y		# 系统启动时从指定的RTC设备中读取时间,以设定系统时间
+		Set the RTC time based on NTP synchronization = Y		# 如果用户空间报告了"NTP已同步",那么每隔大约11分钟,内核将会自动把系统时间写入指定的RTC设备中
+		RTC non volatile storage support = Y				# 实时时钟非易失性存储支持
+		*** 对于剩下的选项 ***						# 各种RTC驱动，除了下列这一项外其余选项全N
+		PC-style 'CMOS' = Y						# 所有PC和基于ACPI的系统通用的RTC驱动
+	DMA Engine support  ---- = N					# DMA引擎支持
+	DMABUF options  --->						# ?
+		Explicit Synchronization Framework = N				# 显式同步框架?

@@ -222,3 +222,5 @@ Device Drivers
 	DMA Engine support  ---- = N					# DMA引擎支持
 	DMABUF options  --->						# ?
 		Explicit Synchronization Framework = N				# 显式同步框架?
+	VFIO Non-Privileged userspace driver framework  ---- = N	# VFIO无特权用户空间I/O驱动框架
+	IOMMU Hardware Support  ---- = N				# IO内存硬件管理单元硬件支持

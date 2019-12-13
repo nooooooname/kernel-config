@@ -176,3 +176,28 @@ Device Drivers
 			SMBus Control Method Interface = N					# SMBus控制方法接口
 		I2C slave support = N						# I2C从机模式支持
 	Hardware Monitoring support  ---- = N				# 温度/电压/风扇转速等状况的监控硬件驱动
+	Generic Thermal sysfs driver  ---> = -Y-			# 为ACPI规范中定义的"thermal"(发热控制)提供一个通用的sysfs接口,以方便与诸如温度传感器和风扇之类的设备通信.
+		Emergency poweroff delay in milli-seconds = 0			# 过热紧急关机延迟毫秒数，0代表不支持紧急关机
+		Enable writable trip points = Y					# 允许用户空间程序更改温度报警阀值
+		X86 package temperature thermal driver = N			# 检测"Package温度"的驱动
+	Watchdog Timer Support  ---- = N				# 看门狗支持
+	Multifunction device drivers  --->				# 多功能设备驱动，子选项全N
+	Multimedia support  ---- = N					# 多媒体设备支持
+	Graphics support  --->						# 图形设备/显卡支持
+		/dev/agpgart (AGP Support)  ---- = N					# GART(图形地址重映射表)
+		VGA Arbitration = -Y-							# VGA仲裁
+		Maximum number of GPUs = 1						# 最大显卡数
+		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)  ---- = N	# 直接渲染管理
+		Frame buffer Devices  --->						# 帧缓冲区设备
+			*** Frame buffer hardware drivers ***					# 帧缓冲区对图形硬件的驱动，除了下列这一项外其余选项全N
+			EFI-based Framebuffer Support = Y					# 基于EFI的帧缓冲区支持
+		Console display driver support  --->					# 控制台显示驱动
+			Enable Scrollback Buffer in System RAM = N				# 在内存中开辟更大的屏幕回滚缓冲区
+			Framebuffer Console support = Y						# 基于帧缓冲区的图形模式控制台
+			Map the console to the primary display device = N			# 自动将控制台映射到主显卡，可通过fbcon=map:N更改映射关系
+		Bootup logo  ---- = N							# 启动时显示linux的企鹅logo,企鹅的数量表示内核检测到的CPU数目
+	Sound card support  ---> = M					# 声卡支持，soundcore
+		Advanced Linux Sound Architecture  ---> = M			# ALSA子系统，snd
+			PCI sound devices  ---> = Y				# PCI声卡设备，除了下列这一项之外其余子选项全N
+				(Creative) Ensoniq AudioPCI 1371/1373 = M		# Ensoniq ES1371声卡驱动
+			Pre-allocated buffer size for HD-audio driver = 0	# 为HD-audio声卡驱动预先分配的缓冲区大小(kB)

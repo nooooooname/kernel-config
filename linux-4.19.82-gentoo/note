@@ -217,10 +217,10 @@ Device Drivers
 		Set system time from RTC on startup and resume = Y		# 系统启动时从指定的RTC设备中读取时间,以设定系统时间
 		Set the RTC time based on NTP synchronization = Y		# 如果用户空间报告了"NTP已同步",那么每隔大约11分钟,内核将会自动把系统时间写入指定的RTC设备中
 		RTC non volatile storage support = Y				# 实时时钟非易失性存储支持
-		*** 对于剩下的选项 ***						# 各种RTC驱动，除了下列这一项外其余选项全N
+		*** 剩下的选项 ***						# 各种RTC驱动，除了下列这一项外其余选项全N
 		PC-style 'CMOS' = Y						# 所有PC和基于ACPI的系统通用的RTC驱动
 	DMA Engine support  ---- = N					# DMA引擎支持
 	DMABUF options  --->						# ?
 		Explicit Synchronization Framework = N				# 显式同步框架?
-	VFIO Non-Privileged userspace driver framework  ---- = N	# VFIO无特权用户空间I/O驱动框架
+	VFIO Non-Privileged userspace driver framework  ---- = N	# VFIO无特权用户空间I/O驱动框架(依赖于IOMMU Hardware Support)
 	IOMMU Hardware Support  ---- = N				# IO内存硬件管理单元硬件支持

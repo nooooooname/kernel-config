@@ -25,7 +25,7 @@ Power management and ACPI options
 		ACPI Time and Alarm (TAD) Device Support = M
 		Thermal Zone = N	# ACPI thermal zone 支持.系统温度过高时可以及时调整风扇的工作状态以避免你的CPU被烧毁.目前所有CPU都支持此特性.务必开启.
 		ACPI Platform Error Interface (APEI) = N	# 高级平台错误接口
-		ACPI configfs support = M
+		ACPI configfs support = N			# 在用户空间通过/config/acpi下的配置文件来配置ACPI，需要有configfs支持
 	CPU Frequency scaling  --->			# CPUfreq子系统允许动态改变CPU主频
 		CPU Frequency scaling = Y			# (虚拟机没必要开启)
 		CPU frequency transition statistics = N		# 通过sysfs文件系统输出CPU频率变化的统计信息
@@ -224,3 +224,19 @@ Device Drivers
 		Explicit Synchronization Framework = N				# 显式同步框架?
 	VFIO Non-Privileged userspace driver framework  ---- = N	# VFIO无特权用户空间I/O驱动框架(依赖于IOMMU Hardware Support)
 	IOMMU Hardware Support  ---- = N				# IO内存硬件管理单元硬件支持
+
+File systems
+	The Extended 4 (ext4) filesystem = M				# Ext4文件系统，ext4
+	XFS filesystem support = M					# XFS文件系统，xfs
+	Enable filesystem export operations for block IO = N		# ?
+	Quota support = N						# 磁盘配额支持
+	FUSE (Filesystem in Userspace) support = M			# 用户空间文件系统支持，fuse.ko，NTFS-3G和GlusterFS依赖于此
+	CD-ROM/DVD Filesystems  --->					# 光盘文件系统
+		ISO 9660 CDROM file system support = M				# ISO9660光盘文件系统，isofs
+		UDF file system support = M					# UDF文件系统，udf
+	DOS/FAT/NT Filesystems  --->					# DOS/FAT/NTFS文件系统
+		VFAT (Windows-95) fs support = M				# FAT32文件系统，vfat
+	Pseudo filesystems  --->					# 伪文件系统
+		/proc/kcore support = N						# 内核虚拟ELF文件/proc/kcore，只读
+		EFI Variable filesystem = M					# "EFI变量"文件系统，efivarfs
+	Native language support  ---> = -Y-				# 本地语言支持. 默认utf8，字符集选项中除了UTF-8=Y之外其余选项全N

@@ -240,3 +240,16 @@ File systems
 		/proc/kcore support = N						# 内核虚拟ELF文件/proc/kcore，只读
 		EFI Variable filesystem = M					# "EFI变量"文件系统，efivarfs
 	Native language support  ---> = -Y-				# 本地语言支持. 默认utf8，字符集选项中除了UTF-8=Y之外其余选项全N
+
+Security options  --->						# 安全选项，全默认
+
+Cryptographic API  ---> = -Y-					# 内核加密API支持，先跳过
+
+Library routines  --->						# 库子程序，先跳过
+
+Kernel hacking
+	Magic SysRq key = Y						# SysRq"魔法键"
+	Enable magic SysRq key functions by default = 0x1		# 设置默认开启哪些魔法键.设为"1"表示开启所有魔法键,设为"0"表示禁用所有魔法键.
+	Enable magic SysRq key over serial = N				# 在串口上启用SysRq"魔法键"?
+	IO delay type = no port-IO delay (CONFIG_IO_DELAY_NONE)		# IO延迟方式=无IO延迟
+	Choose kernel unwinder = ORC unwinder				# 内核堆栈跟踪方法? 保持默认

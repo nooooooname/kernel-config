@@ -243,9 +243,9 @@ File systems
 
 Security options  --->						# 安全选项，全默认
 
-Cryptographic API  ---> = -Y-					# 内核加密API支持，先跳过
+Cryptographic API  ---> = -Y-					# 内核加密API支持，最小集
 
-Library routines  --->						# 库子程序，先跳过
+Library routines  --->						# 库子程序，最小集
 
 Kernel hacking
 	Magic SysRq key = Y						# SysRq"魔法键"

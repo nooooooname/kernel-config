@@ -1,0 +1,257 @@
+General setup
+	Kernel compression mode = LZ4				# 内核压缩算法
+	Namespaces support  --->				# 命名空间支持.主要用于支持基于容器的轻量级虚拟化技术(比如LXC和Linux-VServer以及Docker).
+		UTS namespace = Y				# uname()系统调用的命名空间支持
+	Automatic process group scheduling = N
+	Support initial ramdisk/ramfs compressed using ...	# ramdisk或cpio镜像的压缩/解压格式支持
+		LZ4 = Y, 其他 = N
+
+
+Processor type and features
+	Linux guest support = N				# 此选项启用基本的虚拟机检测和平台设置,如果内核在虚拟机里面运行就开启,否则就关闭.
+	Processor family = Core 2/newer Xeon
+	Maximum number of CPUs = 4
+	Machine Check / overheating reporting = Y
+	CPU microcode loading support = Y		# CPU的微代码更新支持
+	TSX enable mode = off				# 英特尔事务扩展(TSX)指令集
+	EFI runtime service support ->
+		EFI stub support = N			# EFI stub 支持.如果开启此项,就可以不通过引导程序,而是直接由EFI固件来加载内核
+	vsyscall table for legacy applications (Emulate)
+		# 可以用内核命令行参数 vsyscall=[emulate|none] 来修改
+
+
+Power management and ACPI options
+	ACPI (Advanced Configuration and Power Interface) Support  --->
+		Fan = N						# 允许用户模式应用程序执行基本风扇控制(开、关、状态)
+		ACPI Time and Alarm (TAD) Device Support = M
+		Thermal Zone = N	# ACPI thermal zone 支持.系统温度过高时可以及时调整风扇的工作状态以避免你的CPU被烧毁.目前所有CPU都支持此特性.务必开启.
+		ACPI Platform Error Interface (APEI) = N	# 高级平台错误接口
+		ACPI configfs support = N			# 在用户空间通过/config/acpi下的配置文件来配置ACPI，需要有configfs支持
+	CPU Frequency scaling  --->			# CPUfreq子系统允许动态改变CPU主频
+		CPU Frequency scaling = Y			# (虚拟机没必要开启)
+		CPU frequency transition statistics = N		# 通过sysfs文件系统输出CPU频率变化的统计信息
+		Default CPUFreq governor = userspace		# 默认CPU调频策略
+		'performance' governor = M			# 性能优先调频策略
+		'schedutil' cpufreq policy governor = N		# ?
+	CPU Idle  --->
+		Ladder governor (for periodic timer tick) = N	# ?
+	Cpuidle Driver for Intel Processors = N			# 专用于Intel CPU的cpuidle驱动
+
+Bus options (PCI etc.)
+	PCI Express Hotplug driver = N				# PCI-E热插拔驱动
+	PCI Express Downstream Port Containment support = N	# PCI Express Downstream Port Containment是什么?
+	PCI Express Precision Time Measurement support = N	# PCI Express Precision Time Measurement是什么?
+	PCI Stub driver = N					# PCI设备穿透(PCI Stub)
+	PCI IOV support = N					# PCI设备I/O虚拟化
+	Support for PCI Hotplug  ---> = N			# PCI热插拔支持(PCI-E热插拔驱动依赖此项为Y)
+	PCI controller drivers  --->
+		Intel Volume Management Device Driver = N	# 英特尔卷管理设备
+	PCI Endpoint  --->
+		PCI Endpoint Support = N			# PCI端点是什么?
+
+Firmware Drivers
+	EFI (Extensible Firmware Interface) Support  --->
+		EFI Variable Support via sysfs = N		# 通过sysfs接口支持操作(读/写/新建/删除)EFI变量
+		EFI capsule loader = N				# EFI胶囊装载器接口/dev/efi_capsule_loader
+
+Virtualization  ---- = N				# 虚拟化子菜单项全部禁用
+
+Enable loadable module support
+	Trim unused exported kernel symbols = Y				# 从内核和模块中删除未使用的导出符号
+	Enable support for block device writeback throttling = N	# ?
+
+Enable the block layer
+	Partition Types  --->
+		Macintosh partition map support = N			# Mac分区支持
+		BSD disklabel (FreeBSD partition tables) support = N	# FreeBSD分区表支持
+		Windows Logical Disk Manager (Dynamic Disk) support = Y	# Windows动态磁盘支持
+	IO Schedulers  --->					# I/O调度器
+		Deadline I/O scheduler = M				# deadline I/O调度器
+		CFQ I/O scheduler = M					# CFQ(Complete Fair Queuing) I/O调度器
+		Default I/O scheduler = No-op				# 默认I/O调度器(No-op: 带合并的先来先服务调度)
+		MQ deadline I/O scheduler = M				# deadline I/O调度器的MQ版本
+		Kyber I/O scheduler = M					# Kyber I/O调度器
+		BFQ I/O scheduler = N					# BFQ(Budget Fair Queueing) I/O调度器
+
+Memory Management options
+	Low address space to protect from user allocation = 65536
+	Transparent Hugepage Support = Y					# 大页支持
+	Enable cleancache driver to cache clean pages if tmem is present = N	# 内存页的"受害者缓存"
+	Enable frontswap to cache swap pages if tmem is present = N		# 交换内存的"受害者缓存"
+	Contiguous Memory Allocator = N						# 连续内存分配器
+
+Networking support
+	Networking options  --->
+		Packet: sockets monitoring interface = M			# PF_PACKET套接字监控接口
+		UNIX: socket monitoring interface = M				# UNIX套接字监控接口
+		PF_KEY sockets = Y						# PF_KEYv2套接字支持
+		IP: multicasting = N						# IP多播支持
+		IP: kernel level autoconfiguration = N				# 在内核启动时自动配置网卡的ip地址/路由表
+		INET: socket monitoring interface = Y				# INET socket 监控接口
+		UDP: socket monitoring interface = N				# UDP socket 监控接口
+		TCP: advanced congestion control  ---- = N			# TCP高级拥塞控制子菜单(默认为"CUBIC"并将"new Reno"作为候补)
+		TCP: MD5 Signature Option support (RFC2385) = N			# RFC2385中对TCP会话的MD5签名保护机制的支持
+		The IPv6 protocol  ---> = M					# IPv6支持
+			IPv6: AH transformation = N				# IPsec AH 支持
+			IPv6: ESP transformation = N				# IPsec ESP 支持
+			IPv6: IPsec transport mode = N				# IPsec传输模式
+			IPv6: IPsec tunnel mode = N				# IPsec隧道模式
+			IPv6: IPsec BEET mode = N				# IPsec BEET模式
+			IPv6: IPv6-in-IPv4 tunnel (SIT driver) = N		# 在IPv4网络上建立IPv6隧道
+		Security Marking = -Y-						# 网络包安全标记支持
+		NetLabel subsystem support = N					# NetLabel子系统支持
+		Security Marking = Y						# 对网络包进行安全标记
+		Network packet filtering framework (Netfilter)  ---> = Y	# Netfilter,子菜单和子子菜单全部默认
+		802.1d Ethernet Bridging = M					# 802.1d以太网桥
+		QoS and/or fair queueing  ---- = N				# 包调度算法支持，关闭此选项则使用最简单的先进先出算法
+		DNS Resolver support = -Y-					# 内核DNS解析支持
+		Network priority cgroup = Y					# Cgroup子系统支持
+		enable BPF Just In Time compiler = Y				# 伯克利包过滤器(BPF)即时编译，由/proc/sys/net/core/bpf_jit_enable控制开启与关闭
+	Amateur Radio support  ---- = N						# 业余无线电支持
+	Wireless  ---> = -Y-							# 无线网络支持
+		cfg80211 - wireless configuration API = N			# Linux无线局域网(802.11)配置接口
+	RF switch subsystem support  ---- = N					# 射频开关控制器
+
+Device Drivers
+	Block devices  --->
+		Number of loop devices to pre-create at init time = 0		# 系统预先初始化的loop设备个数，此值可以通过内核引导参数loop.max_loop修改
+		DRBD Distributed Replicated Block Device support = N		# DRBD支持
+	NVME Support  --->
+		NVM Express block device = Y					# NVMe块设备
+		NVMe multipath support = Y					# NVMe多路径支持?
+	Misc devices  --->						# 杂项设备，子选项和子菜单选项全N
+	SCSI device support  --->
+		SCSI CDROM support = M						# SCSI光驱支持
+		Asynchronous SCSI scanning = N					# 异步SCSI扫描
+		SCSI low-level drivers  ---- = N				# 底层SCSI驱动程序
+	Serial ATA and Parallel ATA drivers (libata)  ---> = Y		# SATA与PATA(IDE)驱动
+		Verbose ATA error reporting = N					# 输出详细的ATA命令描述信息
+		SATA Port Multiplier support = N				# SATA端口复用器
+		ATA SFF support (for legacy IDE and PATA) = N			# SFF接口支持(用于IDE/PATA)
+	Multiple devices driver support (RAID and LVM)  ---> = Y	# RAID和LVM支持
+		RAID support = N						# "软RAID"支持
+		Device mapper support = N					# 底层卷管理器Device-mapper
+	Fusion MPT device support  ---> = Y				# Fusion MPT设备支持
+		Fusion MPT ScsiHost drivers for SPI = Y				# LSI 53c1030驱动
+		Maximum number of scatter gather entries = 16			# ?
+	Macintosh device drivers  ---- = N				# Mac专有设备驱动
+	Network device support  ---> = Y				# 网络设备支持
+		Ethernet team driver support  ---- = N				# team驱动
+		MAC-VLAN support = N						# MAC-VLAN支持
+		IEEE 802.1AE MAC-level encryption (MACsec) = N			# 802.1AE支持
+		Network console logging support = N				# 网络控制台，用于通过网络记录内核日志信息
+		Universal TUN/TAP device driver support = N			# 虚拟网卡 TUN/TAP 驱动
+		Ethernet driver support  ---- = N				# 网卡驱动
+		FDDI driver support = N						# 光纤分布式数据接口驱动
+		MDIO bus device drivers  ---- = N				# MDIO总线设备驱动?
+		PHY Device support and infrastructure  ---- = N			# 数据链路层芯片简称为MAC控制器,物理层芯片简称之为PHY,通常的网卡把MAC和PHY的功能做到了一颗芯片中,但也有一些仅含PHY的"软网卡".此选项就是对这些"软网卡"的支持.
+		USB Network Adapters  ---- = N					# USB网络适配器
+		Wireless LAN  ---- = N						# 无线网卡
+		VMware VMXNET3 ethernet driver = Y				# VMware vmxnet3 虚拟以太网卡驱动
+	Input device support  --->
+		Support for memoryless force-feedback devices = -Y-		# 力反馈设备
+		Mouse interface = M						# 鼠标接口(/dev/input/mouseX,/dev/input/mice)，mousedev
+		Keyboards  ---> = Y					# 键盘驱动，除了下列这一项之外其余子选项全N
+			AT keyboard = Y						# 标准AT键盘或者PS/2键盘
+		Mice  ---> = Y						# 鼠标驱动，除了下列这一项之外其余子选项全N
+			PS/2 mouse = M						# 标准的两键或三键的PS/2鼠标，psmouse
+		Miscellaneous devices  ---> = Y				# 杂项输入设备，除了下列这一项之外其余子选项全N
+			PC Speaker support = M					# 标准蜂鸣器，pcspkr
+		Hardware I/O ports  --->
+			User space serio port driver support = N		# ?
+	Character devices  --->						# 字符设备
+		Automatically load TTY Line Disciplines = Y			# 自动加载TTY行规程
+		Serial drivers  --->						# 串口(COM)驱动，子选项全N
+		Hardware Random Number Generator Core support  ---- = N		# 硬件随机数发生器设备(/dev/hwrng)支持
+		/dev/nvram support = N						# 以主设备号10次设备号144创建字符设备/dev/nvram来读写CMOS RAM
+		TPM Hardware Support  ---- = N					# 可信平台模块硬件支持
+		/dev/port character device = Y					# /dev/port字符设备，用于访问I/O端口
+	Trust the CPU manufacturer to initialize Linux's CRNG = Y	# 信任CPU的制造商来初始化一致性随机数生成器? 可用"random.trust_cpu=on/off"修改
+	I2C support  --->
+		ACPI I2C Operation region support = N				# 允许BIOS中的代码通过I2C主机控制器驱动访问I2C从设备
+		I2C device interface = N					# I2C设备接口(字符设备/dev/i2c-*)
+		I2C Hardware Bus support  --->
+			Intel PIIX4 and compatible (ATI/AMD/Serverworks/Broadcom/SMSC) = Y	# 英特尔PIIX4系列及与之兼容的系统管理总线(SMBus)驱动
+			SMBus Control Method Interface = N					# SMBus控制方法接口
+		I2C slave support = N						# I2C从机模式支持
+	Hardware Monitoring support  ---- = N				# 温度/电压/风扇转速等状况的监控硬件驱动
+	Generic Thermal sysfs driver  ---> = -Y-			# 为ACPI规范中定义的"thermal"(发热控制)提供一个通用的sysfs接口,以方便与诸如温度传感器和风扇之类的设备通信.
+		Emergency poweroff delay in milli-seconds = 0			# 过热紧急关机延迟毫秒数，0代表不支持紧急关机
+		Enable writable trip points = Y					# 允许用户空间程序更改温度报警阀值
+		X86 package temperature thermal driver = N			# 检测"Package温度"的驱动
+	Watchdog Timer Support  ---- = N				# 看门狗支持
+	Multifunction device drivers  --->				# 多功能设备驱动，子选项全N
+	Multimedia support  ---- = N					# 多媒体设备支持
+	Graphics support  --->						# 图形设备/显卡支持
+		/dev/agpgart (AGP Support)  ---- = N					# GART(图形地址重映射表)
+		VGA Arbitration = -Y-							# VGA仲裁
+		Maximum number of GPUs = 1						# 最大显卡数
+		Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)  ---- = N	# 直接渲染管理
+		Frame buffer Devices  --->						# 帧缓冲区设备
+			*** Frame buffer hardware drivers ***					# 帧缓冲区对图形硬件的驱动，除了下列这一项外其余选项全N
+			EFI-based Framebuffer Support = Y					# 基于EFI的帧缓冲区支持
+		Console display driver support  --->					# 控制台显示驱动
+			Enable Scrollback Buffer in System RAM = N				# 在内存中开辟更大的屏幕回滚缓冲区
+			Framebuffer Console support = Y						# 基于帧缓冲区的图形模式控制台
+			Map the console to the primary display device = N			# 自动将控制台映射到主显卡，可通过fbcon=map:N更改映射关系
+		Bootup logo  ---- = N							# 启动时显示linux的企鹅logo,企鹅的数量表示内核检测到的CPU数目
+	Sound card support  ---> = M					# 声卡支持，soundcore
+		Advanced Linux Sound Architecture  ---> = M			# ALSA子系统，snd
+			PCI sound devices  ---> = Y				# PCI声卡设备，除了下列这一项之外其余子选项全N
+				(Creative) Ensoniq AudioPCI 1371/1373 = M		# Ensoniq ES1371声卡驱动
+			Pre-allocated buffer size for HD-audio driver = 0	# 为HD-audio声卡驱动预先分配的缓冲区大小(kB)
+	HID support  --->						# 人机接口(HID)设备支持,HID设备不一定要有人机接口,只要符合HID规范,就是HID设备.[提示]PS/2接口的鼠标和键盘不是HID设备,USB或蓝牙接口的才是HID设备.
+		HID bus support = N						# HID总线及通用HID层
+	USB support  ---> = Y						# USB支持
+		Support for Host-side USB = M					# 主机端USB支持，usbcore
+		PCI based USB host interface = N				# 基于PCI的USB接口
+		Enable USB persist by default = Y				# 默认电力会话中断期间USB设备数据结构维持不变
+		xHCI HCD (USB 3.0) support = M					# USB 3.0驱动，xhci-hcd
+		EHCI HCD (USB 2.0) support = M					# USB 2.0驱动，ehci-hcd
+		USB Mass Storage support = M					# USB存储设备支持，usb-storage，该选项下边依赖于此的具体设备全N
+		*** USB Imaging devices ***					# USB影像设备，全N
+		USB Serial Converter support  ---- = N				# USB-串口转换支持
+		*** USB Miscellaneous drivers ***				# USB杂项驱动，全N
+	Real Time Clock  ---> = Y					# 通用实时时钟类支持，(下面的第一个子项选N会怎样?)
+		Set system time from RTC on startup and resume = Y		# 系统启动时从指定的RTC设备中读取时间,以设定系统时间
+		Set the RTC time based on NTP synchronization = Y		# 如果用户空间报告了"NTP已同步",那么每隔大约11分钟,内核将会自动把系统时间写入指定的RTC设备中
+		RTC non volatile storage support = Y				# 实时时钟非易失性存储支持
+		*** 剩下的选项 ***						# 各种RTC驱动，除了下列这一项外其余选项全N
+		PC-style 'CMOS' = Y						# 所有PC和基于ACPI的系统通用的RTC驱动
+	DMA Engine support  ---- = N					# DMA引擎支持
+	DMABUF options  --->						# ?
+		Explicit Synchronization Framework = N				# 显式同步框架?
+	VFIO Non-Privileged userspace driver framework  ---- = N	# VFIO无特权用户空间I/O驱动框架(依赖于IOMMU Hardware Support)
+	IOMMU Hardware Support  ---- = N				# IO内存硬件管理单元硬件支持
+
+File systems
+	The Extended 4 (ext4) filesystem = M				# Ext4文件系统，ext4
+	XFS filesystem support = Y					# XFS文件系统，xfs
+	Enable filesystem export operations for block IO = N		# ?
+	Inotify support for userspace = Y				# Inotify文件系统变化通知机制
+	Quota support = N						# 磁盘配额支持
+	FUSE (Filesystem in Userspace) support = M			# 用户空间文件系统支持，fuse.ko，NTFS-3G和GlusterFS依赖于此
+	CD-ROM/DVD Filesystems  --->					# 光盘文件系统
+		ISO 9660 CDROM file system support = M				# ISO9660光盘文件系统，isofs
+		UDF file system support = M					# UDF文件系统，udf
+	DOS/FAT/NT Filesystems  --->					# DOS/FAT/NTFS文件系统
+		VFAT (Windows-95) fs support = Y				# FAT32文件系统，vfat
+			Default codepage for FAT = 936				# FAT默认代码页
+			Default iocharset for FAT = cp936			# FAT显示文件名默认使用的字符集(codepage936)
+	Pseudo filesystems  --->					# 伪文件系统
+		/proc/kcore support = N						# 内核虚拟ELF文件/proc/kcore，只读
+		EFI Variable filesystem = M					# "EFI变量"文件系统，efivarfs
+	Native language support  ---> = -Y-				# 本地语言支持. 默认语言设置为utf8，字符集选项中除了CP936(GB2312)和UTF-8=Y之外其余选项全N
+
+Security options  --->						# 安全选项，全默认
+
+Cryptographic API  ---> = -Y-					# 内核加密API支持，最小集
+
+Library routines  --->						# 库子程序，最小集
+
+Kernel hacking
+	Magic SysRq key = Y						# SysRq"魔法键"
+	Enable magic SysRq key functions by default = 0x1		# 设置默认开启哪些魔法键.设为"1"表示开启所有魔法键,设为"0"表示禁用所有魔法键.
+	Enable magic SysRq key over serial = N				# 在串口上启用SysRq"魔法键"?
+	IO delay type = no port-IO delay (CONFIG_IO_DELAY_NONE)		# IO延迟方式=无IO延迟
+	Choose kernel unwinder = ORC unwinder				# 内核堆栈跟踪方法? 保持默认
